@@ -1,0 +1,121 @@
+% This is the preamble
+% <https://en.wikibooks.org/wiki/LaTeX/Document_Structure#Global_structure> of
+% Letter.tex. If you want to change the text of the letter, edit Letter.tex. If
+% you want to change the formatting of the letter, edit this file.
+
+\input ushyphex
+\usepackage[no-config]{fontspec}
+\usepackage[hmargin=1.75in,noheadfoot,nomarginpar]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+% Use Linux Libertine <http://libertine-fonts.org> as the main font.
+\setmainfont{Linux Libertine O}[Numbers=Proportional]
+
+% Use Gillius <http://arkandis.tuxfamily.org/adffonts.html> as the sans serif
+% font. Turn off “Required” ligatures so that AE isn’t replaced with Æ, for
+% example.
+\setsansfont{Gillius ADF No2}[Ligatures=NoRequired]
+
+% Change the category code (catcode) of @ to permit using and modifying internal
+% LaTeX commands.
+\makeatletter
+
+% Don’t indent paragraphs.
+\parindent\z@
+% Separate paragraphs by 6 pt (“bp” means “big point”, and 1bp is 1/72 inch).
+\parskip=6bp
+
+% Define an environment and commands for signatures.
+\newenvironment{signatureBlock}{%
+  \begin{list}{}{%
+    % Align signature blocks to the outside margin.
+    \leftmargin\dimexpr\linewidth-\signatureLineLength\relax%
+    \parsep\z@%
+    \partopsep\parskip%
+  }\item[]%
+}{\end{list}}
+\newlength\signatureLineLength
+\signatureLineLength=3in
+
+\newcommand\signatureLine[1]{%
+  \vspace{42bp}%
+  \makebox[\signatureLineLength]{#1}\hspace{-\signatureLineLength}%
+  \leaders\hrule height-\signatureLineHeight depth\signatureLineDepth\hfill\kern\z@%
+}
+\newlength\signatureLineHeight
+\signatureLineHeight=0.25ex
+\newlength\signatureLineDepth
+\signatureLineDepth=\dimexpr\signatureLineHeight+0.1ex\relax
+
+\newcommand\signature[1]{%
+  \raisebox{\z@}[\z@]{\includegraphics[width=0.5\signatureLineLength]{#1}}%
+}
+
+% Restore the catcode of @.
+\makeatother
+
+\AtBeginDocument{
+  \frenchspacing    % Don’t put extra space after a full stop.
+  \pagestyle{empty} % Don’t put a page number in the footer.
+
+  % Add a letterhead. Measure the width of Sigma Alumni Association’s address so
+  % that it can be aligned with the right margin. This measurement technique is
+  % from the pbox package.
+  \newlength{\SigmaAddressWidth}
+  \settowidth{\SigmaAddressWidth}{\begin{tabular}{@{}l@{}}\SigmaAddress\end{tabular}}%
+
+  \begin{tikzpicture}[
+      remember picture,
+      overlay,
+      % Remove padding and margins around all nodes.
+      every node/.style={inner sep=0,outer sep=0}
+    ]
+    \node at ([shift={( 36bp, -36bp)}]current page.north west) [anchor=north west] {%
+      \begin{minipage}{360bp}
+        \sffamily\fontsize{24bp}{30bp}\selectfont\addfontfeature{LetterSpace=6}%
+        \MakeUppercase{Sigma Alumni Association}\\
+        \MakeUppercase{of Lambda Chi Alpha}\par
+      \end{minipage}
+    };
+    \node at ([shift={(-36bp, -36bp)}]current page.north east) [anchor=north east] {%
+      \begin{minipage}{\SigmaAddressWidth}
+        \baselineskip=13.3bp%
+        \SigmaAddress\par
+      \end{minipage}
+    };
+  \end{tikzpicture}
+
+  \vspace{1in}
+
+  \today
+
+  \vspace{0.125in}
+
+  \tenantName\\
+  1601 Washtenaw Ave\\
+  Ann Arbor MI 48104-3586
+
+  \vspace{0.25in}
+}
+
+\AtEndDocument{
+  \begin{signatureBlock}
+    Sigma Alumni Association of Lambda Chi Alpha, Inc.
+
+    \signatureLine{\signature{support/SigmaSignature}\hfill \SigmaSignatureDate}
+
+    By: \SigmaSignatoryName\hfill Date\\
+    Its: \SigmaSignatoryTitle
+  \end{signatureBlock}
+
+  \begin{signatureBlock}
+    Tenant
+
+    \signatureLine{}
+
+    \tenantName\hfill Date
+  \end{signatureBlock}
+}
+
+\input info

@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\input LetterPreamble
+
+\usepackage[calc,useregional]{datetime2}
+\DTMusemodule{english}{en-US}
+\DTMsavenow{now}
+\DTMsavedate{lease start date}{\DTMfetchyear{now}-08-15}
+\DTMsavedate{lease end date}{\DTMfetchyear{now}-12-31}
+\newcount\termDuration
+\DTMsaveddatediff{lease end date}{lease start date}{\termDuration}
+
+\newcommand*\rentTotal{\$1,000.00}
+
+\begin{document}
+
+The lease between Sigma Alumni Association of Lambda Chi Alpha, Inc., and
+\tenantName\ is amended to end on \DTMusedate{lease end date}. For avoidance of
+doubt, this means:
+
+\begin{enumerate}
+  \item The term of the lease shall be \the\termDuration\ 24-hour periods
+  starting on \DTMusedate{lease start date} and ending on
+  \DTMusedate{lease end date}
+
+  \item Rent for the term of the lease shall be \rentTotal, plus all other rent
+  that becomes due under the lease.
+\end{enumerate}
+
+\end{document}

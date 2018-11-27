@@ -1,0 +1,55 @@
+# https://www.appveyor.com/docs/appveyor-yml
+
+environment:
+  matrix:
+    # https://www.appveyor.com/docs/build-environment/#python
+    - PYTHON: C:\Python27
+    - PYTHON: C:\Python27-x64
+    - PYTHON: C:\Python37
+    - PYTHON: C:\Python37-x64
+
+install:
+  # Download and install a minimal TeX Live, based on
+  # https://github.com/latex3/latex3/blob/master/support/texlive.sh.
+  - ps: Start-FileDownload 'http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip'
+  - 7z x install-tl.zip
+  - cd install-tl-20*
+  - ps: Set-Content texlive.profile "selected_scheme scheme-minimal`nTEXDIR C:\texlive`noption_doc 0`noption_src 0`n"
+  - install-tl-windows -profile=texlive.profile
+  - cd ..
+  - set PATH=%PATH%;C:\texlive\bin\win32
+  - tlmgr install
+    datetime2
+    datetime2-english
+    etoolbox
+    fontspec
+    geometry
+    gillius
+    graphics
+    hyphenex
+    latex-bin
+    libertine
+    luaotfload
+    luatex85
+    oberdiek
+    pgf
+    standalone
+    tracklang
+    varwidth
+    xcolor
+    xkeyval
+
+  # Switch to the environment’s version of Python.
+  - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+
+build_script:
+  - python --version
+  - python init.py
+  - for /l %G in (1, 1, 2) do lualatex Letter.tex
+
+test: off
+
+artifacts:
+  - path: Letter.pdf
+
+skip_tags: true
