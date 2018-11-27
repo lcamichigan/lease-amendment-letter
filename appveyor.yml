@@ -45,7 +45,7 @@ install:
 build_script:
   - python --version
   - python init.py
-  - for /l %G in (1, 1, 2) do lualatex Letter.tex
+  - for /l %%G in (1, 1, 2) do lualatex -interaction=batchmode Letter.tex
 
 test: off
 

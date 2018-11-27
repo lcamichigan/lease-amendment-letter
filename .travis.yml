@@ -37,4 +37,4 @@ before_script:
 
 script:
   - ./init.py
-  - for i in {1..2}; do lualatex Letter.tex; done
+  - for i in {1..2}; do lualatex -interaction=batchmode Letter.tex; done

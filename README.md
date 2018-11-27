@@ -69,10 +69,22 @@ python init.py
 This runs the Python script [init.py](init.py). This script creates an info.tex
 file.
 
-Now, enter
+Now, enter in PowerShell:
+
+```powershell
+ForEach ($i in 1..2) { lualatex Letter.tex }
+```
+
+or in Command Prompt:
+
+```batch
+for /l %G in (1, 1, 2) do lualatex Letter.tex
+```
+
+or in Terminal:
 
 ```sh
-lualatex Letter.tex
+for i in {1..2}; do lualatex Letter.tex; done
 ```
 
 This will create a PDF file of a letter using the information in info.tex.
