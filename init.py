@@ -9,17 +9,17 @@ import textwrap
 file_path = 'info.tex'
 if not os.path.exists(file_path):
     with open(file_path, 'w') as file:
-        file.write(textwrap.dedent('''
-        \\newcommand*\\tenantName{TenantFirstName TenantLastName}
-        \\newcommand*\SigmaAddress{Sigma Alumni Association\\\\
-          123 Main St\\\\
-          Anywhere MI 00000-0000\\\\
-          lcamichigan.com%
-        }
-        \\newcommand*\SigmaSignatoryName{Warren Cole}
-        \\newcommand*\SigmaSignatoryTitle{President}
-        \\newcommand*\SigmaSignatureDate{\\today}
-        ''').lstrip())
+        file.write(textwrap.dedent('''\
+            \\newcommand*\\tenantName{TenantFirstName TenantLastName}
+            \\newcommand*\SigmaAddress{Sigma Alumni Association\\\\
+              123 Main St\\\\
+              Anywhere MI 00000-0000\\\\
+              lcamichigan.com%
+            }
+            \\newcommand*\SigmaSignatoryName{Warren Cole}
+            \\newcommand*\SigmaSignatoryTitle{President}
+            \\newcommand*\SigmaSignatureDate{\\today}
+        '''))
 
 directory_name = 'support'
 if not os.path.exists(directory_name):
