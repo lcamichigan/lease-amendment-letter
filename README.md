@@ -72,7 +72,7 @@ file.
 Now, enter in PowerShell:
 
 ```powershell
-ForEach ($i in 1..2) { lualatex Letter.tex }
+foreach ($i in 1..2) { lualatex Letter.tex }
 ```
 
 or in Command Prompt:
