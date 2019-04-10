@@ -17,8 +17,8 @@ This is a collection of resources for creating letters describing amendments to
 
 To make a letter, you need [LuaTeX](http://www.luatex.org) and
 [Python](https://www.python.org). Both of these are free and cross-platform. You
-also need the OpenType versions of the fonts
-[Linux Libertine](http://libertine-fonts.org) and
+also need the fonts
+[Libertinus](https://github.com/libertinus-fonts/libertinus) and
 [Gillius](http://arkandis.tuxfamily.org/adffonts.html). These are also free, and
 you’ll get them automatically when you install LuaTeX.
 

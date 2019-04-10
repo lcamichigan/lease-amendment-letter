@@ -28,7 +28,7 @@ install:
     graphics
     hyphenex
     latex-bin
-    libertine
+    libertinus-fonts
     luaotfload
     luatex85
     oberdiek
